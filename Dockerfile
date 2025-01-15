@@ -1,6 +1,5 @@
 # Indicando imagem base
-
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/nanoserver:1809
 
 # Copia arquivos da aplicação web para pasta de publicação do Nginx
 COPY . /usr/share/nginx/html/
