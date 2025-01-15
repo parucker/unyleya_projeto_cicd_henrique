@@ -68,15 +68,32 @@ steps:
 #    pollingTimeoutSec: '300'
 
 
-- task: Docker@1
+
+        
+- task: Docker@2
+  displayName: 'Login to Docker Hub'
   inputs:
+    command: 'login'
+    containerRegistry: 'DockerHubPublicImages'  # Conexão do Docker Hub ou ACR
+
+- task: Docker@2
+  displayName: 'Build Docker image'
+  inputs:
+    command: 'build'
+    Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+    buildContext: '$(Build.SourcesDirectory)'  # Caminho do diretório do Dockerfile
+    tags: 'latest'
     containerRegistry: 'DockerHubPublicImages'
-    repository: 'parucker/mobead_image_build'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    repository: 'parucker/mobead_image_build:latest'
+
+- task: Docker@2
+  displayName: 'Push Docker image to Docker Hub'
+  inputs:
+    command: 'push'
+    containerRegistry: 'DockerHubPublicImages'
+    repository: 'parucker/mobead_image_build:latest'
 
 - task: PublishPipelineArtifact@1
   inputs:
        artifactName: # 'drop'
-        
-
+       
