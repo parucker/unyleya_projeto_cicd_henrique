@@ -55,9 +55,11 @@ steps:
 #     version: '4.7.2'
 #     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-# - task: VSBuild@1
-#   inputs:
-#     solution: '**\*.sln'
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '4.0.0' # Replace with the required framework version
+
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
