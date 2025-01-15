@@ -92,6 +92,7 @@ steps:
     command: 'push'
     containerRegistry: 'DockerHubPublicImages'
     repository: 'parucker/mobead_image_build'
+    tags: latest
 
 - task: PublishPipelineArtifact@1
   inputs:
