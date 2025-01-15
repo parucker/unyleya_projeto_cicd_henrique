@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-2019'  # Ou qualquer outro agente de sua escolha
+
+stages:
+- stage: Deploy
+  displayName: Deploy Docker Image to Azure App Service
+  jobs:
+  - job: Deploy
+    displayName: Deploy Docker Image to Azure App Service
+    steps:
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: Azure subscription 1
+        appName: my-app-unyleya-service  # Nome do App Service no Azure
+        imageName: parucker/mobead_image_build:latest  # Nome da imagem Docker no Docker Hub (com a tag)
