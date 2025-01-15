@@ -49,9 +49,18 @@ steps:
 #- powershell: |
 #    $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w/,-.]*"\,?'
 #    Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+# - task: UseDotNet@2
+#   inputs:
+#     packageType: 'sdk'
+#     version: '4.7.2'
+#     installationPath: $(Agent.ToolsDirectory)/dotnet
+
+# - task: VSBuild@1
+#   inputs:
+#     solution: '**\*.sln'
 - task: VSBuild@1
   inputs:
-    solution: '$(solution)'
+    solution: '**\*.sln'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
