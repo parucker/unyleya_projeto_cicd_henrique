@@ -54,12 +54,13 @@ steps:
 #     packageType: 'sdk'
 #     version: '4.7.2'
 #     installationPath: $(Agent.ToolsDirectory)/dotnet
-
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     version: '4.x'
-
+    includePreviewVersions: true
+    performMultiLevelLookup: true
+  
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
