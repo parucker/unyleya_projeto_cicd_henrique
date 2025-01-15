@@ -1,6 +1,6 @@
 # Indicando imagem base
 
-FROM mcr.microsoft.com/windows/nginx:1809
+FROM mcr.microsoft.com/windows/nginx:ltsc2019
 
 # Copia arquivos da aplicação web para pasta de publicação do Nginx
 COPY . /usr/share/nginx/html/
