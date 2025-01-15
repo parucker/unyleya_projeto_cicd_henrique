@@ -58,7 +58,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '4.0.0' # Replace with the required framework version
+    version: '4.7.2' # Replace with the required framework version
 
 - task: VSBuild@1
   inputs:
