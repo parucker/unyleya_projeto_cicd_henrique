@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
@@ -54,17 +54,10 @@ steps:
 #     packageType: 'sdk'
 #     version: '4.7.2'
 #     installationPath: $(Agent.ToolsDirectory)/dotnet
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '4.0.30319'
-    includePreviewVersions: true
-    performMultiLevelLookup: true
-  
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
-    msbuildArgs: '/p:Configuration=Release /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DeployIisAppPath="Default Web Site"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
