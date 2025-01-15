@@ -2,23 +2,17 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-2019'  # Ou qualquer outro agente de sua escolha
 
 stages:
-- stage: ApproveAndDeploy
-  displayName: Approve and Deploy to Azure App Service
-  dependsOn: PushDockerImage
+- stage: Deploy
+  displayName: Deploy Docker Image to Azure App Service
   jobs:
   - job: Deploy
     displayName: Deploy Docker Image to Azure App Service
     steps:
-    - task: AzureCLI@2
+    - task: AzureWebAppContainer@1
       inputs:
         azureSubscription: Azure subscription 1
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          az webapp config container set \
-            --name my-docker-app-service \
-            --resource-group my-resource-group \
-            --docker-custom-image-name paruckerh/mobead_image_build:latest
+        appName: my-app-unyleya-service  # Nome do App Service no Azure
+        imageName: parucker/mobead_image_build:latest  # Nome da imagem Docker no Docker Hub (com a tag)
