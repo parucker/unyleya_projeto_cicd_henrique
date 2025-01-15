@@ -67,15 +67,16 @@ steps:
 #  inputs:
 #    pollingTimeoutSec: '300'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-       artifactName: # 'drop'
-       
-- task: Docker@2
+
+- task: Docker@1
   inputs:
     containerRegistry: 'DockerHubPublicImages'
     repository: 'parucker/mobead_image_build'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
- 
+
+- task: PublishPipelineArtifact@1
+  inputs:
+       artifactName: # 'drop'
+        
 
