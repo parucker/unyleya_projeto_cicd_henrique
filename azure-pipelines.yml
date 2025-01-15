@@ -55,15 +55,10 @@ steps:
 #     version: '4.7.2'
 #     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- task: PowerShell@2
+- task: UseDotNet@2
   inputs:
-    targetType: 'inline'
-    script: |
-      Get-ChildItem "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP" -Recurse |
-      Get-ItemProperty -Name Version -ErrorAction SilentlyContinue |
-      Where-Object { $_.PSChildName -match '^(v\d)' } |
-      Select PSChildName, Version
-
+    packageType: 'sdk'
+    version: '4.5'
 
 - task: VSBuild@1
   inputs:
