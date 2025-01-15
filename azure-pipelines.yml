@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-1809'
+  vmImage: 'window:1809'
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
