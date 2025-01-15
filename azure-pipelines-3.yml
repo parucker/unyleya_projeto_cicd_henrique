@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include:
+      - main
+
+stages:
+  - stage: Deploy
+    displayName: Deploy to Azure App Service
+    jobs:
+      - deployment: DeployToAzure
+        displayName: Deploy Docker Image to Azure
+        environment: "production"
+        pool:
+          vmImage: 'windows-2019'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                # Baixa os artefatos da build
+                - download: current
+                  displayName: Download Build Artifacts
+
+                # Deploy para Azure App Service
+                - task: AzureWebAppContainer@1
+                  inputs:
+                    azureSubscription: 'Azure subscription 1'
+                    appName: '<App Service Name>' # Nome do App Service
+                    imageName: 'paruckerh/mobead_image_build:latest' # Exemplo: mydockerhubrepo/myapp:latest
+                    containerCommand: '' # Caso algum comando extra seja necessário
